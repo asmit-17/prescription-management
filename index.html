@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedTrack - Login</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="logo-container">
+                <i class="fas fa-pills logo-icon"></i>
+                <h1 class="logo-text">MedTrack</h1>
+                <p class="tagline">Your Personal Medication Manager</p>
+            </div>
+
+            <div class="dark-mode-toggle">
+                <input type="checkbox" id="darkModeToggle" class="toggle-checkbox">
+                <label for="darkModeToggle" class="toggle-label">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                    <span class="toggle-ball"></span>
+                </label>
+            </div>
+            
+            <form id="loginForm" class="form">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope icon"></i>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="error-message" id="emailError"></div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock icon"></i>
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                        <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                    </div>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+                
+                <div class="options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="login-btn">Login</button>
+                
+                <div class="divider">
+                    <span>or</span>
+                </div>
+                
+                <div class="social-login">
+                    <button type="button" class="google-btn" id="googleLogin">
+                        <i class="fab fa-google"></i> Continue with Google
+                    </button>
+                    <button type="button" class="facebook-btn" id="facebookLogin">
+                        <i class="fab fa-facebook-f"></i> Continue with Facebook
+                    </button>
+                </div>
+                
+                <p class="signup-link">Don't have an account? <a href="#" id="signupLink">Sign up</a></p>
+            </form>
+            
+            <div id="signupForm" class="form hidden">
+                <h2>Create Account</h2>
+                
+                <div class="input-group">
+                    <label for="signupName">Full Name</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user icon"></i>
+                        <input type="text" id="signupName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="error-message" id="nameError"></div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="signupEmail">Email</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope icon"></i>
+                        <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="error-message" id="signupEmailError"></div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="signupPassword">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock icon"></i>
+                        <input type="password" id="signupPassword" placeholder="Create a password" required>
+                        <i class="fas fa-eye password-toggle" id="toggleSignupPassword"></i>
+                    </div>
+                    <div class="password-requirements">
+                        <p>Password must contain:</p>
+                        <ul>
+                            <li id="req-length">At least 8 characters</li>
+                            <li id="req-uppercase">1 uppercase letter</li>
+                            <li id="req-lowercase">1 lowercase letter</li>
+                            <li id="req-number">1 number</li>
+                            <li id="req-special">1 special character</li>
+                        </ul>
+                    </div>
+                    <div class="error-message" id="signupPasswordError"></div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock icon"></i>
+                        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                    </div>
+                    <div class="error-message" id="confirmPasswordError"></div>
+                </div>
+                
+                <div class="terms">
+                    <input type="checkbox" id="agreeTerms" required>
+                    <label for="agreeTerms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                </div>
+                
+                <button type="button" class="signup-btn" id="signupSubmit">Create Account</button>
+                
+                <p class="login-link">Already have an account? <a href="#" id="loginLink">Log in</a></p>
+            </div>
+        </div>
+        
+        <div class="image-container">
+            <img src="clock with meds.jpg" alt="Medication management" class="login-image light-image">
+            <img src="clock with meds(DM).jpg" alt="Medication management dark" class="login-image dark-image hidden">
+            <div class="image-overlay">
+                <h2>Never Miss a Dose Again</h2>
+                <p>Track your medications, set reminders, and manage your health with our comprehensive prescription management system.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="alert" id="alertBox"></div>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

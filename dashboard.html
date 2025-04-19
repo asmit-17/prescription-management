@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MedTrack - Dashboard</title>
+    <link rel="stylesheet" href="dashboard-styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.css"
+    />
+    <link rel="manifest" href="manifest.json" />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+        <div class="logo-container">
+          <i class="fas fa-pills logo-icon"></i>
+          <h1 class="logo-text">MedTrack</h1>
+        </div>
+
+        <nav class="nav-menu">
+          <ul>
+            <li class="active">
+              <a href="#dashboard">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="#medications">
+                <i class="fas fa-prescription-bottle-alt"></i>
+                <span>Medications</span>
+              </a>
+            </li>
+            <li>
+              <a href="#schedule">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Schedule</span>
+              </a>
+            </li>
+            <li>
+              <a href="#history">
+                <i class="fas fa-history"></i>
+                <span>History</span>
+              </a>
+            </li>
+            <li>
+              <a href="#reports">
+                <i class="fas fa-chart-line"></i>
+                <span>Reports</span>
+              </a>
+            </li>
+            <li>
+              <a href="#profile">
+                <i class="fas fa-user-circle"></i>
+                <span>Profile</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="dark-mode-toggle">
+            <input
+              type="checkbox"
+              id="darkModeToggle"
+              class="toggle-checkbox"
+            />
+            <label for="darkModeToggle" class="toggle-label">
+              <i class="fas fa-moon"></i>
+              <i class="fas fa-sun"></i>
+              <span class="toggle-ball"></span>
+            </label>
+            <span>Dark Mode</span>
+          </div>
+          <button id="logoutBtn" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="main-content">
+        <header class="header">
+          <div class="header-left">
+            <button class="menu-toggle" id="menuToggle">
+              <i class="fas fa-bars"></i>
+            </button>
+            <h2 class="page-title">Dashboard</h2>
+          </div>
+          <div class="header-right">
+            <div class="notification-bell">
+              <i class="fas fa-bell"></i>
+              <span class="notification-count">3</span>
+            </div>
+            <div class="user-profile">
+              <img
+              src="https://api.dicebear.com/9.x/adventurer-neutral/svg"
+
+                alt="User"
+                id="userAvatar"
+                class="user-avatar"
+              />
+              <span id="userName" class="user-name">Loading...</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+          <!-- Welcome Banner -->
+          <div class="welcome-banner">
+            <div class="welcome-text">
+              <h3>Welcome back, <span id="welcomeUserName">User</span>!</h3>
+              <p>Here's your medication overview for today</p>
+            </div>
+            <div class="current-date">
+              <i class="fas fa-calendar-day"></i>
+              <span id="currentDate">Loading date...</span>
+            </div>
+          </div>
+
+          <!-- Quick Stats -->
+          <div class="quick-stats">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-pills"></i>
+              </div>
+              <div class="stat-info">
+                <h4>Active Medications</h4>
+                <p id="activeMedsCount">0</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div class="stat-info">
+                <h4>Today's Taken</h4>
+                <p id="takenTodayCount">0</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="stat-info">
+                <h4>Upcoming Doses</h4>
+                <p id="upcomingDosesCount">0</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-exclamation-circle"></i>
+              </div>
+              <div class="stat-info">
+                <h4>Needs Renewal</h4>
+                <p id="renewalNeededCount">0</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Dashboard Grid -->
+          <div class="dashboard-grid">
+            <!-- Medications Section -->
+            <section class="medications-section">
+              <div class="section-header">
+                <h3>
+                  <i class="fas fa-prescription-bottle-alt"></i> Your
+                  Medications
+                </h3>
+                <button class="add-med-btn" id="addMedBtn">
+                  <i class="fas fa-plus"></i> Add Medication
+                </button>
+              </div>
+
+              <div class="medication-cards" id="medicationCards">
+                <!-- Medication cards will be dynamically inserted here -->
+                <div class="empty-state">
+                  <i class="fas fa-prescription-bottle-alt"></i>
+                  <p>No medications added yet</p>
+                  <button class="add-med-btn" id="addFirstMedBtn">
+                    <i class="fas fa-plus"></i> Add Your First Medication
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <!-- Upcoming Doses Section -->
+            <section class="upcoming-section">
+              <div class="section-header">
+                <h3><i class="fas fa-clock"></i> Upcoming Doses</h3>
+                <div class="time-filter">
+                  <select id="timeFilter">
+                    <option value="today">Today</option>
+                    <option value="tomorrow">Tomorrow</option>
+                    <option value="week">This Week</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="upcoming-list" id="upcomingList">
+                <!-- Upcoming doses will be dynamically inserted here -->
+              </div>
+            </section>
+
+            <!-- Adherence Chart Section -->
+            <section class="chart-section">
+              <div class="section-header">
+                <h3><i class="fas fa-chart-pie"></i> Adherence This Week</h3>
+                <div class="chart-filter">
+                  <select id="chartFilter">
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                    <option value="year">This Year</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="chart-container">
+                <canvas id="adherenceChart"></canvas>
+              </div>
+            </section>
+
+            <!-- Renewal Alerts Section -->
+            <section class="renewal-section">
+              <div class="section-header">
+                <h3>
+                  <i class="fas fa-exclamation-triangle"></i> Renewal Alerts
+                </h3>
+              </div>
+
+              <div class="renewal-cards" id="renewalCards">
+                <!-- Renewal alerts will be dynamically inserted here -->
+                <div class="empty-state">
+                  <i class="fas fa-check-circle"></i>
+                  <p>No renewals needed at this time</p>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Add Medication Modal -->
+    <div class="modal" id="addMedModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Add New Medication</h3>
+          <button class="close-modal" id="closeMedModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="medicationForm">
+            <div class="form-group">
+              <label for="medName">Medication Name*</label>
+              <input
+                type="text"
+                id="medName"
+                placeholder="e.g., Ibuprofen"
+                required
+              />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="medDosage">Dosage*</label>
+                <input
+                  type="text"
+                  id="medDosage"
+                  placeholder="e.g., 200mg"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="medForm">Form*</label>
+                <select id="medForm" required>
+                  <option value="">Select form</option>
+                  <option value="tablet">Tablet</option>
+                  <option value="capsule">Capsule</option>
+                  <option value="liquid">Liquid</option>
+                  <option value="injection">Injection</option>
+                  <option value="cream">Cream/Ointment</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="medFrequency">Frequency*</label>
+              <select id="medFrequency" required>
+                <option value="">Select frequency</option>
+                <option value="once">Once daily</option>
+                <option value="twice">Twice daily</option>
+                <option value="thrice">Three times daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="as_needed">As needed</option>
+                <option value="custom">Custom</option>
+              </select>
+            </div>
+
+            <div
+              class="form-group"
+              id="customTimesContainer"
+              style="display: none"
+            >
+              <label>Custom Times</label>
+              <div class="time-inputs">
+                <div class="time-input">
+                  <input type="time" class="custom-time" />
+                  <button type="button" class="remove-time-btn">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="add-time-btn" id="addTimeBtn">
+                <i class="fas fa-plus"></i> Add Another Time
+              </button>
+            </div>
+
+            <div class="form-group">
+              <label for="medInstructions">Special Instructions</label>
+              <textarea
+                id="medInstructions"
+                placeholder="e.g., Take with food, Avoid alcohol, etc."
+                rows="3"
+              ></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="medStartDate">Start Date*</label>
+                <input type="date" id="medStartDate" required />
+              </div>
+              <div class="form-group">
+                <label for="medEndDate">End Date (if applicable)</label>
+                <input type="date" id="medEndDate" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="medPrescriber">Prescribed By</label>
+              <input
+                type="text"
+                id="medPrescriber"
+                placeholder="Doctor's name"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Upload Prescription (optional)</label>
+              <div class="file-upload">
+                <input
+                  type="file"
+                  id="medPrescription"
+                  accept=".pdf,.jpg,.png"
+                />
+                <label for="medPrescription" class="file-upload-label">
+                  <i class="fas fa-cloud-upload-alt"></i>
+                  <span>Choose file or drag here</span>
+                </label>
+                <div class="file-info" id="fileInfo">No file selected</div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="cancel-btn" id="cancelMedBtn">
+                Cancel
+              </button>
+              <button type="submit" class="save-btn">Save Medication</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reminder Modal -->
+    <div class="modal" id="reminderModal">
+      <div class="modal-content small-modal">
+        <div class="modal-header">
+          <h3>Time for Your Medication</h3>
+          <button class="close-modal" id="closeReminderModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="reminder-info">
+            <div class="reminder-med-icon">
+              <i class="fas fa-pills"></i>
+            </div>
+            <div class="reminder-details">
+              <h4 id="reminderMedName">Medication Name</h4>
+              <p id="reminderMedDosage">200mg Tablet</p>
+              <p class="reminder-time">
+                <i class="fas fa-clock"></i>
+                <span id="reminderTime">8:00 AM</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="reminder-actions">
+            <button class="reminder-action-btn taken-btn" id="markTakenBtn">
+              <i class="fas fa-check-circle"></i> Taken
+            </button>
+            <button class="reminder-action-btn missed-btn" id="markMissedBtn">
+              <i class="fas fa-times-circle"></i> Missed
+            </button>
+            <button class="reminder-action-btn snooze-btn" id="snoozeBtn">
+              <i class="fas fa-clock"></i> Snooze (10 min)
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmModal">
+      <div class="modal-content small-modal">
+        <div class="modal-header">
+          <h3 id="confirmTitle">Confirm Action</h3>
+          <button class="close-modal" id="closeConfirmModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p id="confirmMessage">
+            Are you sure you want to perform this action?
+          </p>
+          <div class="confirm-actions">
+            <button class="cancel-btn" id="cancelConfirmBtn">Cancel</button>
+            <button class="confirm-btn" id="proceedConfirmBtn">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alert Notification -->
+    <div class="alert" id="alertBox"></div>
+
+    <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-storage-compat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script src="dashboard-script.js"></script>
+
+    <!-- History Section -->
+    <section class="history-section" id="history">
+      <div class="section-header">
+        <h3><i class="fas fa-history"></i> Medication History</h3>
+        <div class="history-filter">
+          <select id="medicationHistoryFilter">
+            <option value="7">Last 7 Days</option>
+            <option value="30">Last 30 Days</option>
+            <option value="90">Last 90 Days</option>
+            <option value="all" selected>All Time</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="history-table-container">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Medication</th>
+              <th>Dosage</th>
+              <th>Status</th>
+              <th>Time Taken</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody id="historyTableBody">
+            <tr class="empty-state">
+              <td colspan="6">
+                <i class="fas fa-history"></i>
+                <p>No medication history available</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </body>
+</html>

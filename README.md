@@ -1,125 +1,142 @@
-MedTrack - Medication Management System
-Introduction
-MedTrack is a comprehensive medication management system designed to help users track their medications, set reminders, and manage their health regimen. The application provides features for adding medications, scheduling doses, tracking adherence, and receiving renewal alerts. It solves the problem of medication non-adherence by providing timely reminders and a centralized platform for medication management.
+# MedTrack - Medication Management System
 
-Project Type
-Fullstack (Frontend + Backend)
+## Introduction
+MedTrack is a comprehensive medication management web application designed to help users track their medications, set reminders, and maintain their medication adherence. The application provides an intuitive interface for managing prescriptions, scheduling doses, and receiving timely reminders to ensure users never miss a dose.
 
-Deployed App
-Frontend: [Deployed URL here]
-Backend: [Firebase Console URL here]
-Database: [Firebase Firestore URL here]
+## Project Type
+Frontend with Firebase Backend
 
-Directory Structure
+## Deployed App
+https://prescriptionmanager.netlify.app/
+
+## Directory Structure
+```
 medtrack/
-├─ dashboard.html # Main dashboard page
-├─ dashboard-styles.css # Dashboard styles
-├─ dashboard-script.js # Dashboard functionality
-├─ index.html # Login/signup page
-├─ styles.css # Login page styles
-├─ script.js # Login/signup functionality
-├─ manifest.json # PWA configuration
-├─ images/ # Contains all project images
-│ ├─ clock_with_meds.jpg
-│ ├─ clock_with_meds(DM).jpg
+├─ index.html
+├─ dashboard.html
+├─ styles.css
+├─ dashboard-styles.css
+├─ script.js
+├─ dashboard-script.js
+├─ sw.js
+├─ manifest.json
+├─ images/
+│  ├─ clock with meds.jpg
+│  ├─ clock with meds(DM).jpg
+```
 
-Video Walkthrough
-[Attach video walkthrough demonstrating features]
+## Video Walkthrough of the project
+https://drive.google.com/file/d/1OWkFaI9V8UHZQ9o9uz8GWzn9XzQZGcI3/view?usp=drive_link
 
-Features
-Medication Management: Add, edit, and delete medications with dosage information
+## Video Walkthrough of the QnA
+https://youtu.be/6nPWm2mHO60?si=sx4Mojk-5c3zqqcs
 
-Dose Scheduling: Set custom schedules for each medication
+## Features
+- **User Authentication**: Secure login and registration with email/password, Google, and Facebook
+- **Medication Dashboard**: Overview of all active medications with quick stats
+- **Medication Management**: Add, edit, and delete medications with detailed information
+- **Dose Scheduling**: Set custom schedules for medication doses
+- **Reminders**: Receive timely notifications for upcoming doses
+- **Adherence Tracking**: Visual charts to monitor medication adherence
+- **Renewal Alerts**: Get notified when medications need to be renewed
+- **Medication History**: View complete history of medication intake
+- **Dark Mode**: Toggle between light and dark themes for comfortable viewing
+- **Responsive Design**: Optimized for both desktop and mobile devices
+- **PWA Support**: Install as a standalone application on supported devices
 
-Reminders: Get notifications for upcoming doses
+## Design Decisions & Assumptions
+- **Firebase Integration**: Utilized Firebase for authentication, database, and storage to provide a secure and scalable backend solution
+- **Real-time Updates**: Implemented real-time data synchronization to ensure users always have the most up-to-date information
+- **Offline Support**: Added service worker for caching assets to enable basic functionality without internet connection
+- **User Experience**: Designed with a focus on simplicity and ease of use, with clear visual indicators for medication status
+- **Accessibility**: Incorporated high contrast options and clear typography for better readability
+- **Security**: Implemented secure authentication methods and data protection measures
 
-Adherence Tracking: Visual charts showing medication adherence rates
-
-Renewal Alerts: Notifications for expiring or low medications
-
-Dark Mode: User-friendly dark/light mode toggle
-
-Responsive Design: Works on mobile and desktop devices
-
-Design Decisions & Assumptions
-Used Firebase for authentication and data storage for quick implementation
-
-Designed a clean, intuitive UI with medication cards for easy scanning
-
-Implemented a dark mode for user comfort
-
-Assumed users would primarily access via mobile devices
-
-Used Chart.js for data visualization for quick implementation
-
-Installation & Getting Started
-To run MedTrack locally:
-
-bash
-# Clone the repository
-git clone [repository-url]
-
-# Navigate to project directory
+## Installation & Getting Started
+1. Clone the repository
+```bash
+git clone https://github.com/yourusername/medtrack.git
 cd medtrack
+```
 
-# Install live server (if needed)
-npm install -g live-server
+```markdown project="MedTrack" file="README.md"
+...
+```
 
-# Start the application
-live-server
-Note: You'll need to configure your own Firebase project and update the configuration in dashboard-script.js
+2. Install dependencies (if using npm)
 
-Usage
-Sign up or log in using the login page
 
-Add your medications with dosage and schedule information
+```shellscript
+npm install
+```
 
-View upcoming doses on the dashboard
+3. Configure Firebase
 
-Get reminders when it's time to take your medication
+1. Create a Firebase project at [https://console.firebase.google.com/](https://console.firebase.google.com/)
+2. Enable Authentication (Email/Password, Google, Facebook)
+3. Set up Firestore Database
+4. Update the Firebase configuration in script.js and dashboard-script.js with your project credentials
 
-Track your adherence over time using the charts
 
-Credentials
-Test user:
 
-Email: test@example.com
+4. Run the application
 
-Password: test1234
 
-APIs Used
-Firebase Authentication
+```shellscript
+# If using a local server like http-server
+npx http-server
+```
 
-Firebase Firestore
+5. Open the application in your browser
 
-Firebase Storage
 
-Chart.js for data visualization
+```plaintext
+http://localhost:8080
+```
 
-Font Awesome for icons
+## Usage
 
-Technology Stack
-Frontend: HTML5, CSS3, JavaScript
+1. **Registration/Login**: Create an account or log in using email, Google, or Facebook
+2. **Adding Medications**: Click "Add Medication" button on the dashboard to add a new medication
+3. **Setting Reminders**: Configure medication frequency and custom times for reminders
+4. **Tracking Adherence**: View adherence charts to monitor your medication compliance
+5. **Managing Medications**: Edit or delete medications as needed from the dashboard
+6. **Viewing History**: Check your medication history to see past doses
 
-UI Framework: Custom CSS with responsive design
 
-Charts: Chart.js
+## Credentials
 
-Authentication: Firebase Auth
+For testing purposes, you can use the following credentials:
 
-Database: Firebase Firestore
+- Email: abcd@gmail.com
+- Password: Asm@121212
 
-Storage: Firebase Storage
 
-Icons: Font Awesome
+## APIs Used
 
-Future Enhancements
-Push notifications for medication reminders
+- Firebase Authentication API
+-  apiKey: "AIzaSyBVpNLC9RjQ3JJvwI58Ui8thweO5kQ394Y"
+- Firebase Storage API
 
-Integration with pharmacy APIs for automatic refills
 
-Family member management for caregivers
+## API Endpoints
 
-Medication interaction checker
+As this application uses Firebase, it doesn't have traditional REST API endpoints. Instead, it interacts with Firebase services:
 
-Exportable reports for healthcare providers
+- **Authentication**: Firebase Authentication for user management
+- **Database**: Firestore collections for storing medication data
+
+- `/users/{userId}/medications` - Store user medications
+- `/users/{userId}/adherence` - Store adherence data
+
+
+
+- **Storage**: Firebase Storage for prescription images
+
+
+## Technology Stack
+
+- **Frontend**: HTML5, CSS3, JavaScript
+- **Backend**: Firebase (Authentication, Firestore, Storage)
+- Font Awesome for icons
+
